@@ -17,59 +17,61 @@ interface DataCharacter {
 }
 
 export default function CharacterData({ data }: DataCharacter) {
-  const { name, image, gender, species, status }: Item = data;
-
   return (
-    <MainContainer title="Character page">
-      <section className={styles.character__section}>
-        <div className={styles.character__container}>
-          <Link href="/">
-            <a>
-              <button type="button" className={styles.btn}>
-                Home
-              </button>
-            </a>
-          </Link>
-          <Link href="/statistics">
-            <a>
-              <button type="button" className={btnClass}>
-                Statistics
-              </button>
-            </a>
-          </Link>
+    <>
+      {data && (
+        <MainContainer title="Character page">
+          <section className={styles.character__section}>
+            <div className={styles.character__container}>
+              <Link href="/">
+                <a>
+                  <button type="button" className={styles.btn}>
+                    Home
+                  </button>
+                </a>
+              </Link>
+              <Link href="/statistics">
+                <a>
+                  <button type="button" className={btnClass}>
+                    Statistics
+                  </button>
+                </a>
+              </Link>
 
-          <div className={styles.data__contentBox}>
-            <div className={styles.data__thumb}>
-              <Image
-                className={styles.data__img}
-                src={image}
-                width={'250px'}
-                height={'250px'}
-                alt={name}
-              />
+              <div className={styles.data__contentBox}>
+                <div className={styles.data__thumb}>
+                  <Image
+                    className={styles.data__img}
+                    src={data.image}
+                    width={'250px'}
+                    height={'250px'}
+                    alt={data.name}
+                  />
+                </div>
+
+                <ul className={styles.data__list}>
+                  <li className={styles.data__item}>
+                    <p className={styles.data__name}>{data.name}</p>
+                  </li>
+                  <li className={styles.data__item}>
+                    <p className={styles.data__text}>{data.gender}</p>
+                  </li>
+                  <li className={styles.data__item}>
+                    <p className={styles.data__text}>{data.species}</p>
+                  </li>
+
+                  {data.status !== 'unknown' ? (
+                    <li className={styles.data__item}>
+                      <p className={styles.data__text}> {data.status}</p>
+                    </li>
+                  ) : null}
+                </ul>
+              </div>
             </div>
-
-            <ul className={styles.data__list}>
-              <li className={styles.data__item}>
-                <p className={styles.data__name}>{name}</p>
-              </li>
-              <li className={styles.data__item}>
-                <p className={styles.data__text}>{gender}</p>
-              </li>
-              <li className={styles.data__item}>
-                <p className={styles.data__text}>{species}</p>
-              </li>
-
-              {status !== 'unknown' ? (
-                <li className={styles.data__item}>
-                  <p className={styles.data__text}> {status}</p>
-                </li>
-              ) : null}
-            </ul>
-          </div>
-        </div>
-      </section>
-    </MainContainer>
+          </section>
+        </MainContainer>
+      )}
+    </>
   );
 }
 
